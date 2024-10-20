@@ -1,0 +1,252 @@
+SET 2 PROGRAAMS
+
+1. 1)Given an integer array nums, find the
+ subarray with the largest sum, and return its sum.
+ Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+ Output: 6
+ Explanation: The subarray [4,-1,2,1] has the largest sum 6
+
+#include<iostream>
+using namespace std;
+
+  void maxSumsubarray(int nums[],int n)
+  {
+      int sum=nums[0];
+      for(int i=0;i<n;i++)
+      {
+          int currsum=0;
+          for(int j=i;j<n;j++)
+          {
+            currsum+=nums[j];
+            
+            if(currsum>sum)
+            {
+              sum=currsum;   
+            }
+          }
+         
+      }
+      cout<<"sum="<<sum;
+  }
+
+int main(){
+    int nums[]={-2,1,-3,4,-1,2,1,-5,4};
+    int n=sizeof(nums)/sizeof(nums[0]);
+    
+     maxSumsubarray(nums,n);
+    
+    return 0;
+    
+    
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 2) Given an integer array arr[] of size n, the task is to find the count inversions of the given array.
+ Two array elements arr[i] and arr[j] form an inversion if arr[i] > arr[j] and i < j.
+ Input: arr[] = {7, 2, 6, 3}
+ Output: 4
+ Explanation: Given array has 4 inversions: (7, 2), (7, 6), (7, 3), (6, 3
+
+
+#include<iostream>
+using namespace std;
+
+  int inverCount(int arr[],int n)
+  {
+      int count=0;
+      for(int i=0;i<n-1;i++)
+      {
+          for(int j=i+1;j<n;j++)
+          {
+            if(arr[i]>arr[j])
+              count++;
+            
+          }
+         
+      }
+      return count;
+     // cout<<"sum="<<sum;
+  }
+
+int main(){
+    int arr[]={7,5,6,3};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    
+   cout<<inverCount(arr,n);
+    
+    return 0;  
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 5) Given an array arr[] of size n, return an equilibrium index (if any) or-1 if no equilibrium index
+ exists. The equilibrium index of an array is an index such that the sum of elements at lower
+ indexes equals the sum of elements at higher indexes.
+ Note: Return equilibrium point in 1-based indexing. Return-1 if no such point exists.
+ Examples:
+Input: arr[] = {-7, 1, 5, 2,-4, 3, 0}
+ Output: 4
+ Explanation: In 1-based indexing, 4 is an equilibrium index, because:
+ arr[1] + arr[2] + arr[3] = arr[5] + arr[6] + arr[7]
+
+
+#include<iostream>
+using namespace std;
+
+  int equilibriumIndex(int arr[],int n)
+  {
+      int leftsum,rightsum;
+      
+      for(int i=0; i < n; ++i)
+      {
+          leftsum=0;
+          
+          for(int j=0;j<i;j++)
+          {
+            leftsum+=arr[j];
+          }
+          
+          rightsum=0;
+          
+          for(int j=i+1;j<n;j++)
+          {
+            rightsum+=arr[j];
+          }
+          if(leftsum==rightsum)
+           return i+1;
+      }
+      return -1;
+  }
+
+int main(){
+    int arr[]={-7,1,5,2,-4,3,0};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    
+   cout<<equilibriumIndex(arr,n);
+    
+    return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 6)Given a sorted array A (sorted in ascending order), having N integers, find if there exists any
+ pair of elements (A[i], A[j]) such that their sum is equal to X.
+ a)Using Naive Approach
+ b)Using Two Pointer Technique
+ Input: A = [1, 2, 4, 5, 7, 11]
+ N=6
+ X =9
+ Expected Output: Yes
+ (Explanation: The pair (2, 7) sums to 9.)
+
+
+#include<iostream>
+using namespace std;
+
+  int sumofPair(int arr[],int n,int x)
+  {
+      
+      for(int i=0;i<n-1;i++)
+      {
+         for(int j=0;j<n;j++)
+          {
+           if(x==arr[i]+arr[j])
+          return "yes";
+          }
+          
+          
+      }
+    return "no";
+  }
+
+int main(){
+    int arr[]={1,2,4,5,7,11};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int target=9;
+    
+   sumofPair(arr,n,target);
+    
+    return 0;
+}
+    
+
+#include<iostream>
+using namespace std;
+
+  int equilibriumIndex(int arr[],int n)
+  {
+     int totalsum = 0;
+     for(int i : arr) totalsum += i;
+     
+     for (int i = 0; i < n; i++) {
+         totalsum -= arr[i];
+         
+         if(arr[i-1] == totalsum)
+          return i;
+     }
+     return -1;
+  }
+
+int main(){
+    int arr[] = {-7,1,5,2,-4,3,0};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+   cout<<equilibriumIndex(arr,n);
+    
+    return 0;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 4)A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and
+ removing all non-alphanumeric characters, it reads the same forward and backward.
+ Alphanumeric characters include letters and numbers.
+ Given a string s, return true if it is a palindrome, or false otherwise.
+ Example 1:
+ Input: s = “A man, a plan, a canal: Panama”
+ Output: true
+ Explanation: “amanaplanacanalpanama” is a palindrome.
+ Example 2:
+ Input: s = “race a car”;
+ Output: false
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+string sentencePalindrome(string str,int h) 
+{ 
+	int l = 0;
+	h=h-1;
+//	h = str.length() - 1; 
+
+	for (int i = 0; i <= h; i++) 
+		str[i] = tolower(str[i]); 
+
+	while (l <= h)
+	{ 
+		if (!(str[l] >= 'a' && str[l] <= 'z')) 
+			l++; 
+
+		else if (!(str[h] >= 'a' && str[h] <= 'z')) 
+			h--; 
+			
+		else if (str[l] == str[h]) 
+			l++, h--; 
+
+		else
+			return "false"; 
+	} 
+	return "true"; 
+} 
+
+int main() 
+{ 
+	string str = "A man, a plan, a canal: Panama"; 
+	int h=str.size();
+	cout<<h<<endl;
+	
+	cout<<"Sentence is palindrome : "<<sentencePalindrome(str,h);
+
+// 	if (sentencePalindrome(str,h)) 
+// 		cout << "Sentence is palindrome."; 
+// 	else
+// 		cout << "Sentence is not palindrome."; 
+
+	return 0; 
+} 
