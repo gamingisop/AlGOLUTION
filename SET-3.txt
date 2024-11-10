@@ -76,6 +76,52 @@ elements (i.e from index 1 to 4) is 10, So the sequence
 generated is 10 10 10 15 15 90 90
 Input: arr[] = {20, 10, 30}, K = 1
 Output: 20 10 30
+
+
+#include <stdio.h>
+#include <bits/stdc++.h> 
+using namespace std;
+
+int findMax(vector<int> subarr){
+    int k=3,max=0;
+     for ( int i = 1 ; i < k ; i++ )
+     {
+        if ( subarr [ i ] > max )  
+            max = subarr [ i ] ;
+            
+     }
+     return max;
+}
+
+int main()
+{
+     vector<int> subarr;
+    int arr[]={1,2,3,1,2,5,1};
+    int k=3,max=0,s=sizeof(arr)/sizeof(arr[0]); 
+    int maxarr[s-k+1];
+    
+    for(int n=0;n<k;n++)
+    {
+        subarr.push_back(arr[n]); 
+    }
+    
+    int idx = 0;
+    maxarr[idx++] = findMax(subarr);
+
+    for(int i = k; i < s; i++){
+        subarr.erase(subarr.begin());
+        subarr.push_back(arr[i]);
+          maxarr[idx++] = findMax(subarr);
+    }
+     for (int i=0;i<s-k+1;i++)
+     {
+         cout<<maxarr[i]<<" ";
+     }
+     
+    
+    return 0;
+}
+
 ______________________________________________________________________
 4)Given a string s containing only three types of characters: '(', ')' and '*', return true if s is valid.
 The following rules define a valid string:
@@ -159,6 +205,70 @@ Output: true
 Example 3:
 Input: s = ”(]”
 Output: false
+
+
+
+#include <iostream>
+#include <stack>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+       stack<char> stack;
+       string str = "{[]}";
+       for (int i=0;i<str.length();i++)
+       {
+       char ch = str.at(i);
+       if(ch == '(' || ch == '{' || ch == '[')
+       {
+           stack.push(ch);
+           
+       }
+       else
+       {
+           if(stack.empty())
+           {
+                cout<<"False";
+           }
+            
+           char res = stack.top();
+            
+           if(ch == ')' && res == '(')
+           {
+               stack.pop();
+           }
+           
+           else if (ch == ']' && res == '[' )
+           {
+               stack.pop();
+              
+           }
+           else if (ch == '}' && res == '{' )
+           {
+               stack.pop();
+              
+           }
+           else  
+           {
+               cout<<"False";
+              
+           }
+       }
+       
+       
+       }
+        
+        if(stack.empty())
+        {
+            cout<<"True";
+        }
+     
+     
+    
+
+    return 0 ;
+}
 ____________________________________________________________________________
 6)Cyclic Palindrome.
 Description:
@@ -353,4 +463,4 @@ Input: n = 2
 Output: false
 Constraints:
 1 <= n <= 231 - 1
-______________________XXX_________
+______________________XXX_________________________
