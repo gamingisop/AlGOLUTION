@@ -1,4 +1,4 @@
-SET 3 (14/10/2024)
+SET 3 
 
 
 1)In the theory of numbers, square free numbers have a special place. A square free number
